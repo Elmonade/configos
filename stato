@@ -1,0 +1,33 @@
+#!/bin/sh
+
+while true; do
+	if [ -d /sys/class/power_supply/BAT0 ]; then
+		batt=$(cat /sys/class/power_supply/BAT0/capacity)
+		charg=$(cat /sys/class/power_supply/BAT0/status)				
+
+		if [ "$charg" = "Discharging" -a $batt -le 20 ]; then
+			state=!
+		elif [ "$charg" = "Charging" ]; then
+			state=*
+		else
+			state=$null
+		fi
+	else
+		batt="-1"
+	fi
+
+	temp=$(sensors | awk '/Core 0:/ {printf "%d", $3}')C
+
+	mem=$(free | awk '/Mem:/ {printf"%d", $3/1024}')mb
+	
+	if [ "up" = $(cat /sys/class/net/wlp2s0/operstate) ]; then
+		raw_d=$(iwconfig wlp2s0 | awk -F '[^0-9]*' '/Quality=/ {print$2}')
+		wifi=$(( (raw_d*10)/7 ))%
+	else
+		wifi="Down"
+	fi
+
+	xsetroot -name "| $temp| $batt%$state| $mem| $wifi|"
+	
+	sleep 3s
+done

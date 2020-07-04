@@ -1,0 +1,6 @@
+#!/bin/sh
+
+while true; do
+	bri=$(cat /sys/class/backlight/acpi_video0/actual_brightness)
+	xsetroot -name "$bri/15"
+done 
