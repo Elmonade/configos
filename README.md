@@ -1,2 +1,2 @@
-# stato
-my newbie attempt at creating status bar for dwm
+# dot files
+random config files from random systems I own.
