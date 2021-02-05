@@ -1,0 +1,34 @@
+! Changing font and its size along with keybindings
+URxvt.font: xft:Terminus:size=16
+URxvt.keysym.Shift-Down:  resize-font:smaller
+URxvt.keysym.Shift-Up:    resize-font:bigger
+
+! Hate that scroll bar
+URxvt.scrollBar: false
+URxvt.keysym.Control-k: command:\033]720;1\007
+URxvt.keysym.Control-j: command:\033]721;1\007
+
+! Change keybinding for pasting
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+! Release the old keybindings
+URxvt.keysym.Control-Meta-c: builtin-string:
+URxvt.keysym.Control-Meta-v: builtin-string:
+
+! Color scheme
+*.foreground: #fefefe
+*.background: #080712
+*.cursorColor: #ffffff
+! Folders color
+*.color12: #183ef9
+
+! URL
+URxvt.urlLauncher: surf
+URxvt.underlineURLs: true
+URxvt.urlButton: 1
+
+! Fancy
+!URxvt.cursorBlink: true
