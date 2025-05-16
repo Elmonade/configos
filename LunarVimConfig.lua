@@ -22,6 +22,12 @@ lvim.format_on_save = {
 }
 -- to disable icons and use a minimalist setup, uncomment the following
 lvim.use_icons = false
+lvim.builtin.nvimtree.setup.renderer.icons.show = {
+  file = true,
+  folder = false,
+  folder_arrow = true,
+  git = true,
+}
 
 -- keymappings <https://www.lunarvim.org/docs/configuration/keybindings>
 lvim.leader = ";"
@@ -39,6 +45,9 @@ lvim.builtin.which_key.mappings["k"] = { ":bp<CR>", "Previous buffer" }
 
 -- -- Change theme settings
 -- lvim.colorscheme = "lunar"
+-- lvim.colorscheme = "abscs"
+-- lvim.colorscheme = "everforest"
+lvim.colorscheme = "everblush"
 
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
@@ -62,6 +71,7 @@ lvim.builtin.treesitter.auto_install = true
 -- ---configure a server manually. IMPORTANT: Requires `:LvimCacheReset` to take effect
 -- ---see the full default list `:lua =lvim.lsp.automatic_configuration.skipped_servers`
 -- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "clangd" })
 -- local opts = {} -- check the lspconfig documentation for a list of all possible options
 -- require("lvim.lsp.manager").setup("pyright", opts)
 
@@ -108,6 +118,10 @@ formatters.setup {
 -- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
 lvim.plugins = {
   {
+    "Abstract-IDE/Abstract-cs",
+    priority = 1000,
+  },
+  {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
@@ -120,6 +134,22 @@ lvim.plugins = {
     config = function()
       require("jupyter-nvim").setup()
     end,
+  },
+  {
+    "neanias/everforest-nvim",
+    version = false,
+    lazy = false,
+    priority = 1000, -- Before all other plugins
+    config = function()
+      require("everforest").setup({
+        -- More config, if needed.
+        background = "medium",
+      })
+    end,
+  },
+  {
+    "Everblush/nvim",
+    name = 'everblush'
   },
 }
 
